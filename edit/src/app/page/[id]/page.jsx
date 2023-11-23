@@ -1,20 +1,24 @@
+'use server'
 import connection from "@/lib/db";
-// import { transform } from '@babel/standalone';
+import Edit from "../_src/editPage";
+
+var pageId = null;
+
+function saveContent(pageJsx) {
+  if(pageId !== null) {
+    setPage(pageId, pageJsx);
+  }
+}
 
 export default async function main({ params }) {
   const id = params.id;
+  pageId = id;
   const page = await getPage(id);
   const createContent = loadPage(page);
-  console.log(page);
-  const con = <div>{"Hello woasdf"}</div>;
-  const strJson = JSON.stringify(con);
-  const parseJson = JSON.parse(strJson);
-
   return (
     <div>
-      {parseJson.props.children}
-      <br></br>
-      {createContent}
+      <Edit content={page.layout} saveData={saveContent} />
+      {/* {createContent} */}
     </div>
   );
 }
@@ -67,6 +71,14 @@ function getPage(name) {
           resolve(results[0]);
         }
       }
+    });
+ });
+}
+
+function setPage(name, content) {
+  return new Promise((resolve, reject) => {
+    connection.query("UPDATE mainpages SET layouts = ? WHERE link = ?;", [content, name], function(error, results, fields) {
+      
     });
  });
 }
