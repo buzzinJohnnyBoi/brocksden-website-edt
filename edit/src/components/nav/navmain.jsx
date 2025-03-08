@@ -1,6 +1,8 @@
 'use client'
 import React, { Component } from 'react';
-import Link from 'next/link'
+import Link from 'next/link';
+import AddDeletePage from './editPages';
+import AddDeleteArticle from './editArticles';
 
 // import { BrowserRouter, Route, Link } from "react-router-dom";
 // import {Outlet} from "react-router-dom";
@@ -16,7 +18,9 @@ class Nav extends Component {
         mobileMode: this.ismobile,
         menuOpen: false,
         navMobileLeft: "-300px",
-        maxWidthMobile: 850
+        maxWidthMobile: 850,
+        editingPages: false,
+        editingArticles: false
     }
     async updateNavLinks() {
         this.setState({
@@ -37,7 +41,7 @@ class Nav extends Component {
                 <React.Fragment>
                     <div className='cover' onClick={this.changeMenu}></div>
                     <div className='navMobile' style={{left: this.state.navMobileLeft}}>{this.renderLinks()}</div>
-                    <header style={{paddingTop: this.state.paddTop, paddingBottom: this.state.paddTop,}}><ul> <div className='pmfTitle'>Pretty Much Flawless</div>{this.renderMenubtn()}</ul></header>
+                    <header style={{paddingTop: this.state.paddTop, paddingBottom: this.state.paddTop,}}><ul> <div className='pmfTitle'>Brocksden Museum</div>{this.renderMenubtn()}</ul></header>
                     <div className='nav-spacer'></div>
                 </React.Fragment>
             );
@@ -47,20 +51,35 @@ class Nav extends Component {
                 <React.Fragment>
                     <div className='nav-spacer'></div>
                     <header style={{paddingTop: this.state.paddTop, paddingBottom: this.state.paddTop,}}>{this.renderLinks()}</header>
+                    <AddDeletePage showing={this.state.editingPages} hideEditPages={this.hideEditPages}/>
+                    <AddDeleteArticle showing={this.state.editingArticles} hideEditPages={this.hideEditPages}/>
                 </React.Fragment>
             );
         }
     }
     renderLinks() {
         const links = (this.state.links != null) ? this.state.links.map(link => <li key={link.name}><Link href={this.getLink(link.link)} key={link.name}>{link.name}</Link></li>) : (<li>Loading</li>);
+        const editButtonPage = (this.state.mobileMode) ? '' :  <li><button onClick={() => this.showEditPages()}>Edit page</button></li>;
+        const editButtonArticle = (this.state.mobileMode) ? '' :  <li><button onClick={() => this.showEditArticles()}>Edit article</button></li>;
         return (
             <>
                 {/* <img src={mainImg}></img> */}
                 <ul>
                     {links}
+                    {editButtonPage}
+                    {editButtonArticle}
                 </ul>
             </>
         );  
+    }
+    showEditPages = () => {
+        this.setState({ editingPages: true });
+    }
+    showEditArticles = () => {
+        this.setState({ editingArticles: true });
+    }
+    hideEditPages = () => {
+        this.setState({ editingPages: false, editingArticles: false });
     }
     getLink(link) {
         if(link != "") {

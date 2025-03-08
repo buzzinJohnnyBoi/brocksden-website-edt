@@ -1,0 +1,7 @@
+.main {
+    display: block;
+}
+
+.container {
+    min-height: 200vh;
+}

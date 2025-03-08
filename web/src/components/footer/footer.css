@@ -1,0 +1,21 @@
+.footer {
+    background-color: rgb(30, 30, 32);
+    width: calc(100vw - 15px);
+    /* position: relative; */
+    display: block;
+    bottom: 0px;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    /* src: url('./src/britanic-bold.ttf') format('truetype');  */
+}
+.footer .line {
+    width: 100%;
+    background-color: white;
+    height: 1px;
+}
+
+.footer p {
+    font-size: 20px;
+    text-align: center;
+}

@@ -6,6 +6,9 @@ const connection = mysql.createConnection({
     user: 'root',
     password: '5%Jp8FzmpCpuiH$u',
     database: 'brocksden',
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
 });
 
 connection.connect((err) => {

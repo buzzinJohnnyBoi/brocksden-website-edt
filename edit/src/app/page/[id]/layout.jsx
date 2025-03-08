@@ -1,11 +1,13 @@
 import Nav from "../../../components/nav/nav";
+import Footer from "@/components/footer/footer";
 
 export default function DashboardLayout({ children }) {
     return (
         <>
             <Nav/>
-            <section>{children}</section>
+            {children}
+            <br></br>
+            <Footer />
         </>
-    )       
+    )      
 }
-
