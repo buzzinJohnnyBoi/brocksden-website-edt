@@ -35,8 +35,8 @@ class NavHome extends Component {
             return (
                 <React.Fragment>
                     <div className='cover' onClick={this.changeMenu}></div>
-                    <div className='navMobile' style={{left: this.state.navMobileLeft}}>{this.renderLinks()}</div>
-                    <header id="nav-home" style={{paddingTop: this.state.paddTop, paddingBottom: this.state.paddTop,}}><ul> <div className='pmfTitle'>Brocksden Museum</div>{this.renderMenubtn()}</ul></header>
+                    <div className='navMobile' style={{left: this.state.navMobileLeft, zIndex: 1000}}>{this.renderLinks()}</div>
+                    <header id="nav-home" style={{paddingTop: this.state.paddTop, paddingBottom: this.state.paddTop, zIndex: 1000}}><ul> <div className='pmfTitle'>Brocksden Museum</div>{this.renderMenubtn()}</ul></header>
                     <div className='nav-spacer-home' style={{height: "180px"}}></div>
                 </React.Fragment>
             );

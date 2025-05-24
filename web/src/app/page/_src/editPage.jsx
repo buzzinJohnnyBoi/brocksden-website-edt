@@ -45,6 +45,71 @@ class edit extends Component {
         }
     }
 
+    renderExtraJSXTop = () => {
+    if(this.props.id == "Events") {
+        return (
+        <div style={{
+            backgroundColor: '#f5f5f5',
+            padding: '20px',
+            borderRadius: '8px',
+            margin: '20px auto',
+            maxWidth: '800px',
+            textAlign: 'center'
+        }}>
+            <h1 style={{
+            color: '#333',
+            marginBottom: '20px',
+            textAlign: 'center'
+            }}>
+            Upcoming Event Flyers
+            </h1>
+            <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: '20px',
+            flexWrap: 'nowrap'
+            }}>
+            <img 
+                src="/image/teddy bear picnic.jpg" 
+                alt="Teddy Bear Picnic"
+                style={{
+                width: '100px',
+                // height: '300px',
+                borderRadius: '4px',
+                objectFit: 'contain',
+                margin: "0px",
+                padding: "0px",
+
+                }}
+            />
+            <a href="/image/teddy bear picnic.pdf" download>
+                <button style={{
+                    padding: '12px 24px',
+                    backgroundColor: '#4CAF50',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '4px',
+                    cursor: 'pointer',
+                    boxShadow: '0 2px 4px rgba(0,0,0,0.2)'
+                }}>
+                    Download PDF
+                </button>
+            </a>
+            <div style={{
+                fontSize: '16px',
+                fontWeight: 'bold',
+                color: '#333'
+            }}>
+                Teddy Bear Picnic
+            </div>
+            </div>
+        </div>
+        );
+    }
+    return null;
+}
+
     renderContent = () => {
         if(this.state.content == null) {
             return 'loading';
@@ -89,36 +154,42 @@ class edit extends Component {
         }
         else if(this.props.id == "Home") {
             const style = {
-                backgroundSize: "100%",
-                height: "20vw",
+                backgroundSize: "cover",
+                // backgroundPosition: "center",
+                // backgroundRepeat: "no-repeat",
                 width: "20vw",
+                aspectRatio: "1.3", // This maintains a square container
                 display: "inline-block",
                 margin: "1.5vw",
                 borderRadius: "10px"
             }
-                return (
-                    <React.Fragment style={{textAlign: "center"}}>
-                        <div style={{...style, backgroundImage: "url('/image/square_1.jpg')",}}>
-                        </div>
-                        <div style={{...style, backgroundImage: "url('/image/square_2.jpg')",}}>
-                        </div>
-                        <div style={{...style, backgroundImage: "url('/image/square_3.jpg')",}}>
-                        </div>
-                    </React.Fragment>
-                )            
+            return (
+                <React.Fragment style={{textAlign: "center"}}>
+                    <div style={{...style, backgroundImage: "url('/image/square_1.jpg')",}}>
+                    </div>
+                    <div style={{...style, backgroundImage: "url('/image/square_2.jpg')",}}>
+                    </div>
+                    <div style={{...style, backgroundImage: "url('/image/square_3.jpg')",}}>
+                    </div>
+                </React.Fragment>
+            )            
         }
         else {
             return '';
         }
     }
     render() { 
+        const extraJSXTop = this.renderExtraJSXTop();
         const content = this.renderContent();
         const articles = this.renderArticlesOnCorrectPage();
         return (
-            <div className='mainContainer' onClick={this.hideContextMenu}>
-                {content}
-                {articles}
-            </div>
+            <>
+                <div className='mainContainer' onClick={this.hideContextMenu}>
+                    {extraJSXTop}
+                    {content}
+                    {articles}
+                </div>
+            </>
         );
     }
 }
